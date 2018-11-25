@@ -68,7 +68,7 @@ if ssid != nil, let scanner = NetworkScanner(), let network = scanner.getNetwork
         
     // brute-force approach
     } else if bf {
-        if let rockYou = TxtDataLoader(forResource: "rockyou"), let scanner = NetworkScanner(){
+        if let rockYou = TxtDataLoader(forResource: "rockyou") {
             
             // trying passwords from dictionary
             for pw in rockYou.lines {
