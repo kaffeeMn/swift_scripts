@@ -44,8 +44,8 @@ class NetworkScanner {
     
     // fetching specific Network
     func getNetwork(withSSID: String) -> CWNetwork? {
-        for network in self.networks{
-            if ssid == network.ssid{
+        for network in self.networks {
+            if ssid == network.ssid {
                 return network
             }
         }
@@ -55,17 +55,17 @@ class NetworkScanner {
 
 
 // easy access to lines in .txt files
-class TxtDataLoader{
+class TxtDataLoader {
     var filePath : String
     var lines : Array<Substring>
     
     // trying to load the file, can fail
     init?(forResource: String){
         self.filePath = Bundle.main.path(forResource: forResource, ofType: "txt")!
-        do{
+        do {
             let content = try String(contentsOfFile: self.filePath)
             lines = content.split(separator: "\n")
-        }catch{
+        } catch {
             return nil
         }
     }

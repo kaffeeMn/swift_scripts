@@ -20,22 +20,22 @@ var ls = false
 //args parsing
 //============
 
-for arg in CommandLine.arguments[1..<CommandLine.arguments.endIndex]{
+for arg in CommandLine.arguments[1..<CommandLine.arguments.endIndex] {
     
     // password
-    if(arg.starts(with: "--pw=")){
+    if arg.starts(with: "--pw=") {
         pw = arg.split(separator: "=")[1...].joined(separator: "=")
         
     // listing networks
-    }else if(arg.starts(with: "--ls")){
+    } else if arg.starts(with: "--ls") {
         ls = true
         
     // ssid of network that ought to be connected to
-    }else if(arg.starts(with: "--ssid=")){
+    } else if arg.starts(with: "--ssid=") {
         ssid = arg.split(separator: "=")[1...].joined(separator: "=")
         
     // brute force approach if no password has been submitted
-    }else if(arg == "--brute_force"){
+    } else if arg == "--brute_force" {
         bf = true;
     }
     
@@ -46,7 +46,7 @@ for arg in CommandLine.arguments[1..<CommandLine.arguments.endIndex]{
 //================================
 
 // listing networks
-if(ls), let scanner = NetworkScanner() {
+if ls, let scanner = NetworkScanner() {
     for network in scanner.networks {
         print("\(network.ssid!)")
         print("\(network)")
@@ -59,25 +59,25 @@ if ssid != nil, let scanner = NetworkScanner(), let network = scanner.getNetwork
     
     // connecting with passowrd
     if pw != nil {
-        do{
+        do {
             try scanner.currentInterface.associate(to: network, password: pw!)
-        }catch let error as NSError {
+        } catch let error as NSError {
             print("could not connect to \(ssid!)")
             print("ERROR: \(error.localizedDescription)")
         }
         
     // brute-force approach
-    }else if bf{
+    } else if bf {
         if let rockYou = TxtDataLoader(forResource: "rockyou"), let scanner = NetworkScanner(){
             
             // trying passwords from dictionary
-            for pw in rockYou.lines{
-                do{
+            for pw in rockYou.lines {
+                do {
                     try scanner.currentInterface.associate(to: network, password: String(pw))
                     // did not fail -> correct password
                     print("Connected to \(ssid!) with password \(pw)")
                     break
-                } catch{
+                } catch {
                     // failed -> wrong password
                 }
             }
