@@ -24,7 +24,7 @@ for arg in CommandLine.arguments[1..<CommandLine.arguments.endIndex]{
     
     // password
     if(arg.starts(with: "--pw=")){
-        pw = arg.split(separator: "=")[1...].joined(separator: "")
+        pw = arg.split(separator: "=")[1...].joined(separator: "=")
         
     // listing networks
     }else if(arg.starts(with: "--ls")){
@@ -32,7 +32,7 @@ for arg in CommandLine.arguments[1..<CommandLine.arguments.endIndex]{
         
     // ssid of network that ought to be connected to
     }else if(arg.starts(with: "--ssid=")){
-        ssid = arg.split(separator: "=")[1...].joined(separator: "")
+        ssid = arg.split(separator: "=")[1...].joined(separator: "=")
         
     // brute force approach if no password has been submitted
     }else if(arg == "--brute_force"){
